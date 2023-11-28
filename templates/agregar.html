@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Dispositivo</title>
+    <style>
+        /* Agrega estilos según tus preferencias */
+        #device, #value {
+            /* Ejemplo de estilos llamativos */
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            width: 200px; /* Ajusta según tus necesidades */
+        }
+    </style>
+</head>
+<body>
+    <h1>Agregar Dispositivo</h1>
+
+    <form id="add-device-form">
+        <!-- Agrega estilos y atributos según tus necesidades -->
+        <label for="device">Dispositivo:</label>
+        <input type="text" id="device" name="device" required>
+
+        <label for="value">Valor:</label>
+        <input type="text" id="value" name="value" pattern="\d+" title="Ingrese solo números" required>
+
+        <button type="button" onclick="agregarDispositivo()">Agregar Dispositivo</button>
+    </form>
+
+    <div id="mensaje"></div>
+    <div id="error-mensaje"></div>
+
+    <script src="static/js/agregar.js"></script>
+</body>
+</html>
