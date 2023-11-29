@@ -2,14 +2,65 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend de Dispositivos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dispositivos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos personalizados para los botones y la tabla */
+        .custom-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .custom-button:hover {
+            background-color: #0056b3;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        /* Estilo adicional para centrar la tabla */
+        .table-container table {
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Lista de Dispositivos</h1>
-    
-    <ul id="deviceList"></ul>
+    <div class="container text-center">
+        <h1 class="my-4">Dispositivos</h1>
 
-    <script src="static/js/get_all.js"></script>
+        <!-- Botón para agregar un nuevo dispositivo -->
+        <a href="agregar" class="btn btn-primary custom-button">Agregar Nuevo Dispositivo</a>
+
+        <!-- Contenedor de la tabla centrada -->
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Dispositivo</th>
+                        <th>Valor</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody id="deviceList">
+                    <!-- Aquí se mostrarán los datos de los dispositivos -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Scripts y estilos de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script principal para obtener datos y redirigir -->
+    <script src="../static/js/get_all.js"></script>
 </body>
 </html>

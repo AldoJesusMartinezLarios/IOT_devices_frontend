@@ -18,3 +18,7 @@ def editar():
 @app.route("/agregar")
 def agregar():
     return render_template("agregar.html")
+
+@app.route("/borrar")
+def borrar():
+    return render_template("borrar.html")

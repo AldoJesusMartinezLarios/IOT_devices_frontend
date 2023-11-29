@@ -1,5 +1,6 @@
 function agregarDispositivo() {
     // Obtén los valores del formulario
+    const id = document.getElementById("id").value;
     const device = document.getElementById("device").value;
     const value = document.getElementById("value").value;
 
@@ -10,6 +11,7 @@ function agregarDispositivo() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+            id: id,
             device: device,
             value: value,
         }),

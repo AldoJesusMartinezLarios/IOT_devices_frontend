@@ -1,67 +1,69 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // ...
+    obtenerDispositivos();
 
     function obtenerDispositivos() {
         var request = new XMLHttpRequest();
         request.open('GET', 'http://127.0.0.1:8000/iot');
         request.send();
 
-        request.onload = (e) => {
-            const response = request.responseText;
-            const dispositivos = JSON.parse(response);
-            console.log("response: " + response);
-            console.log("json: " + JSON.stringify(dispositivos));
-            console.log("status_code: " + request.status);
+        request.onload = function () {
+            if (request.status === 200) {
+                const dispositivos = JSON.parse(request.responseText);
 
-            const deviceList = document.getElementById('deviceList');
+                // Limpiar la lista de dispositivos antes de actualizarla
+                const deviceList = document.getElementById('deviceList');
+                deviceList.innerHTML = '';
 
-            // Limpia la lista de dispositivos antes de actualizarla
-            deviceList.innerHTML = '';
+                dispositivos.forEach(device => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${device.id}</td>
+                        <td>${device.device}</td>
+                        <td>${device.value}</td>
+                        <td>
+                            <button class="btn btn-primary ver-button">Ver</button>
+                            <button class="btn btn-success editar-button">Editar</button>
+                            <button class="btn btn-danger borrar-button">Borrar</button>
+                        </td>
+                    `;
+                    deviceList.appendChild(tr);
 
-            dispositivos.forEach(device => {
-                const li = document.createElement('li');
-                li.textContent = `ID: ${device.id}, Dispositivo: ${device.device}, Valor: ${device.value}`;
+                    // Asignar event listeners a los botones
+                    const verButton = tr.querySelector('.ver-button');
+                    const editarButton = tr.querySelector('.editar-button');
+                    const borrarButton = tr.querySelector('.borrar-button');
 
-                // Crear botón "Ver" para cada dispositivo
-                const viewButton = document.createElement('button');
-                viewButton.textContent = 'Ver';
-                viewButton.className = 'btn btn-primary'; // Aplicar la clase de Bootstrap
+                    verButton.addEventListener('click', function () {
+                        verDispositivo(device.id);
+                    });
 
-                viewButton.addEventListener('click', function () {
-                    // Redirige a la página "ver.html" con el ID como parámetro
-                    window.location.href = `ver?id=${device.id}`;
+                    editarButton.addEventListener('click', function () {
+                        editarDispositivo(device.id);
+                    });
+
+                    borrarButton.addEventListener('click', function () {
+                        borrarDispositivo(device.id);
+                    });
                 });
+            } else {
+                console.error('Error al obtener dispositivos. Código de estado:', request.status);
+            }
+        };
 
-                // Crear botón "Editar" para cada dispositivo
-                const editButton = document.createElement('button');
-                editButton.textContent = 'Editar';
-                editButton.className = 'btn btn-success'; // Aplicar la clase de Bootstrap
-
-                editButton.addEventListener('click', function () {
-                    // Redirige a la página "editar.html" con el ID como parámetro
-                    window.location.href = `editar?id=${device.id}`;
-                });
-
-                // Crear botón "Borrar" para cada dispositivo
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Borrar';
-                deleteButton.className = 'btn btn-danger'; // Aplicar la clase de Bootstrap
-
-                deleteButton.addEventListener('click', function () {
-                    // Redirige a la página "borrar.html" con el ID como parámetro
-                    window.location.href = `borrar?id=${device.id}`;
-                });
-
-                // Agregar los botones a la lista de dispositivos
-                li.appendChild(viewButton);
-                li.appendChild(editButton);
-                li.appendChild(deleteButton);
-
-                deviceList.appendChild(li);
-            });
+        request.onerror = function () {
+            console.error('Error de red al intentar obtener dispositivos.');
         };
     }
 
-    // Llama a la función para obtener dispositivos cuando la página se carga
-    obtenerDispositivos();
+    function verDispositivo(id) {
+        window.location.href = `ver?id=${id}`;
+    }
+
+    function editarDispositivo(id) {
+        window.location.href = `editar?id=${id}`;
+    }
+
+    function borrarDispositivo(id) {
+        window.location.href = `borrar?id=${id}`;
+    }
 });

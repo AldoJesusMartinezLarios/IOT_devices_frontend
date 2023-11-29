@@ -2,38 +2,44 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Agregar Dispositivo</title>
-    <style>
-        /* Agrega estilos según tus preferencias */
-        #device, #value {
-            /* Ejemplo de estilos llamativos */
-            padding: 10px;
-            border: 2px solid #3498db;
-            border-radius: 5px;
-            font-size: 16px;
-            color: #333;
-            width: 200px; /* Ajusta según tus necesidades */
-        }
-    </style>
+    <!-- Enlaza tu archivo JavaScript específico para la página "agregar.html" -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/agregar.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Agregar Dispositivo</h1>
+    <div class="container text-center">
+        <h1 class="my-4">Agregar Nuevo Dispositivo</h1>
 
-    <form id="add-device-form">
-        <!-- Agrega estilos y atributos según tus necesidades -->
-        <label for="device">Dispositivo:</label>
-        <input type="text" id="device" name="device" required>
+        <!-- Formulario para agregar un nuevo dispositivo -->
+        <form id="agregar-dispositivo-form">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" class="form-control" id="id" placeholder="Ingrese el ID">
+            </div>
+            <div class="form-group">
+                <label for="device">Dispositivo:</label>
+                <input type="text" class="form-control" id="device" placeholder="Ingrese el nombre del dispositivo">
+            </div>
+            <div class="form-group">
+                <label for="value">Valor:</label>
+                <input type="text" class="form-control" id="value" placeholder="Ingrese el valor del dispositivo">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="agregarDispositivo()">Agregar Dispositivo</button>
+        </form>
 
-        <label for="value">Valor:</label>
-        <input type="text" id="value" name="value" pattern="\d+" title="Ingrese solo números" required>
+        <!-- Mensajes de éxito y error -->
+        <div id="mensaje" class="mt-3 text-success"></div>
+        <div id="error-mensaje" class="mt-3 text-danger"></div>
 
-        <button type="button" onclick="agregarDispositivo()">Agregar Dispositivo</button>
-    </form>
+        <!-- Enlace para regresar -->
+        <a class="btn btn-secondary mt-3" href="/">Regresar</a>
+    </div>
 
-    <div id="mensaje"></div>
-    <div id="error-mensaje"></div>
-
-    <script src="static/js/agregar.js"></script>
+    <!-- Agrega el script al final para garantizar que se cargue después de la página -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
