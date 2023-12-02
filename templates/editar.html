@@ -2,38 +2,27 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Editar Dispositivo</title>
-    <style>
-        /* Agrega estilos según tus preferencias */
-        #device, #value {
-            /* Ejemplo de estilos llamativos */
-            padding: 10px;
-            border: 2px solid #3498db;
-            border-radius: 5px;
-            font-size: 16px;
-            color: #333;
-            width: 200px; /* Ajusta según tus necesidades */
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Editar Dispositivo</h1>
+    <div class="container text-center">
+        <h1 class="my-4">Editar Dispositivo</h1>
 
-    <form id="edit-device-form">
-        <!-- Agrega estilos y atributos según tus necesidades -->
-        <label for="device">Dispositivo:</label>
-        <input type="text" id="device" name="device" required>
+        <!-- Contenedor del botón de encendido y apagado -->
+        <div id="editar-container">
+            <button id="encenderButton" class="btn btn-success">Encender</button>
+            <button id="apagarButton" class="btn btn-danger">Apagar</button>
+        </div>
+    </div>
 
-        <label for="value">Nuevo Valor:</label>
-        <input type="text" id="value" name="value" pattern="\d+" title="Ingrese solo números" required>
+    <!-- Scripts y estilos de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        <button type="button" onclick="actualizar()">Actualizar Valor</button>
-    </form>
-
-    <div id="mensaje"></div>
-    <div id="error-mensaje"></div>
-
-    <script src="static/js/editar.js"></script>
+    <!-- Script principal para editar dispositivos -->
+    <script src="../static/js/editar.js"></script>
 </body>
 </html>

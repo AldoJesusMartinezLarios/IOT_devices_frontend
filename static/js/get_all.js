@@ -3,48 +3,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function obtenerDispositivos() {
         var request = new XMLHttpRequest();
-        request.open('GET', 'http://127.0.0.1:8000/iot');
+        request.open('GET', 'https://iot-backend-iylp.onrender.com/dispositivos');
         request.send();
 
         request.onload = function () {
             if (request.status === 200) {
                 const dispositivos = JSON.parse(request.responseText);
 
-                // Limpiar la lista de dispositivos antes de actualizarla
-                const deviceList = document.getElementById('deviceList');
-                deviceList.innerHTML = '';
+                // Obtener el elemento 'deviceList'
+                const dispositivoList = document.getElementById('deviceList');
 
-                dispositivos.forEach(device => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${device.id}</td>
-                        <td>${device.device}</td>
-                        <td>${device.value}</td>
-                        <td>
-                            <button class="btn btn-primary ver-button">Ver</button>
-                            <button class="btn btn-success editar-button">Editar</button>
-                            <button class="btn btn-danger borrar-button">Borrar</button>
-                        </td>
-                    `;
-                    deviceList.appendChild(tr);
+                // Verificar si el elemento existe antes de operar sobre él
+                if (dispositivoList) {
+                    // Limpiar la lista de dispositivos antes de actualizarla
+                    dispositivoList.innerHTML = '';
 
-                    // Asignar event listeners a los botones
-                    const verButton = tr.querySelector('.ver-button');
-                    const editarButton = tr.querySelector('.editar-button');
-                    const borrarButton = tr.querySelector('.borrar-button');
+                    dispositivos.forEach(dispositivo => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${dispositivo.id}</td>
+                            <td>${dispositivo.dispositivo}</td>
+                            <td>${dispositivo.valor}</td>
+                            <td>
+                                <button class="btn btn-success editar-button">Editar</button>
+                            </td>
+                        `;
+                        dispositivoList.appendChild(tr);
 
-                    verButton.addEventListener('click', function () {
-                        verDispositivo(device.id);
+                        // Asignar event listeners a los botones
+                        const editarButton = tr.querySelector('.editar-button');
+
+                        editarButton.addEventListener('click', function () {
+                            editarDispositivo(dispositivo.id);
+                        });
                     });
-
-                    editarButton.addEventListener('click', function () {
-                        editarDispositivo(device.id);
-                    });
-
-                    borrarButton.addEventListener('click', function () {
-                        borrarDispositivo(device.id);
-                    });
-                });
+                } else {
+                    console.error('Elemento con ID "deviceList" no encontrado.');
+                }
             } else {
                 console.error('Error al obtener dispositivos. Código de estado:', request.status);
             }
@@ -55,15 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    function verDispositivo(id) {
-        window.location.href = `ver?id=${id}`;
-    }
-
     function editarDispositivo(id) {
         window.location.href = `editar?id=${id}`;
-    }
-
-    function borrarDispositivo(id) {
-        window.location.href = `borrar?id=${id}`;
     }
 });
